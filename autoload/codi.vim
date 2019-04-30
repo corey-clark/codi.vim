@@ -594,6 +594,8 @@ function! s:codi_handle_done(bufnr, output)
       endif
     endfor
 
+    call s:codi_output_to_virtual_text(a:bufnr, result)
+
     " Only take last num_lines of lines
     let lines = join(result[:num_lines - 1], "\n")
   else
@@ -629,6 +631,15 @@ function! s:codi_handle_done(bufnr, output)
     exe "keepjumps normal! gv\<c-g>"
   endif
   keepjumps call cursor(ret_line, ret_col)
+endfunction
+
+function! s:codi_output_to_virtual_text(bufnr, result)
+  " Iterate through the result and print using virtual text
+  let i = 0
+  for line in a:result
+    call nvim_buf_set_virtual_text(a:bufnr, -1, i, [[line]], {})   
+    let i += 1
+  endfor
 endfunction
 
 function! s:codi_spawn(filetype)
