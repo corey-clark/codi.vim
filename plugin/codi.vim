@@ -73,5 +73,14 @@ if !exists('g:codi#log')
   let g:codi#log = ''
 endif
 
+" Path for the file where Codi log information. Logging is disabled by default 
+if !exists('g:codi#virtual_text')
+  if has('nvim')
+    let g:codi#virtual_text = 1
+  else
+    let g:codi#virtual_text = 0
+  endif
+endif
+
 command! -nargs=? -bang -bar -complete=filetype Codi call codi#run(<bang>0, <f-args>)
 command! -bar CodiUpdate call codi#update()

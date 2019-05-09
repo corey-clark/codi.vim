@@ -309,6 +309,14 @@ g:codi#log
 
              Default value is '', which disbles all logging.
 
+                                                          *g:codi#virtual_text*
+g:codi#virtual_text
+             On nvim, instead of printing the REPL output to the Scratch
+             buffer, it removes that buffer and prints the text next to the
+             corresponding line.
+
+             Default value is 1, if on nvim.
+
 ==============================================================================
 AUTOCOMMANDS                                               *codi-autocommands*
 

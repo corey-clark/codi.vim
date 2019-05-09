@@ -360,7 +360,7 @@ endfunction
 " Trigger autocommands and silently update
 function! codi#update()
   " Bail if no codi buf to act on except running on nvim
-  if s:nvim == 0 && !s:get_codi('bufnr') | return | endif
+  if s:nvim == 0 && g:codi#virtual_text == 0 && !s:get_codi('bufnr') | return | endif
 
   call s:user_au('CodiUpdatePre')
   silent call s:codi_do_update()
@@ -513,7 +513,7 @@ function! s:codi_handle_data(data, msg)
       if a:data['received'] > a:data['expected']
         call s:log('All prompts received')
         call s:stop_job_for_buf(a:data['bufnr'])
-        if s:nvim
+        if s:nvim && g:codi#virtual_text
           silent call s:nvim_codi_handle_done(
                 \ a:data['bufnr'], join(a:data['lines'], "\n"))
         else
@@ -598,8 +598,6 @@ function! s:codi_handle_done(bufnr, output)
         endif
       endif
     endfor
-
-    call s:codi_output_to_virtual_text(a:bufnr, result)
 
     " Only take last num_lines of lines
     let lines = join(result[:num_lines - 1], "\n")
@@ -791,8 +789,8 @@ function! s:codi_spawn(filetype)
     augroup END
   endif
 
-  " Spawn codi buffer if not nvim
-  if s:nvim == 0
+  " Spawn codi buffer if not nvim or virtual text is disabled
+  if s:nvim == 0 || g:codi#virtual_text == 0
     exe 'keepjumps keepalt '
           \.(s:get_opt('rightsplit') ? 'rightbelow' : 'leftabove').' '
           \.(s:get_codi('width', s:pane_width())).'vnew'
@@ -803,7 +801,9 @@ function! s:codi_spawn(filetype)
 
   " Return to target split and save codi bufnr
   keepjumps keepalt wincmd p
-  if s:nvim == 0 | call s:let_codi('bufnr', bufnr('$')) | endif
+  if s:nvim == 0 || g:codi#virtual_text == 0
+    call s:let_codi('bufnr', bufnr('$'))
+  endif
   silent call codi#update()
   call s:user_au('CodiEnterPost')
 endfunction
