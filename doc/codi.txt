@@ -38,6 +38,7 @@ CONFIGURATION.............................................|codi-configuration|
     g:codi#sync..................................................|g:codi#sync|
     g:codi#use_buffer_dir..............................|g:codi#use_buffer_dir|
     g:codi#log....................................................|g:codi#log|
+    g:codi#virtual_text..................................|g:codi#virtual_text|
 AUTOCOMMANDS...............................................|codi-autocommands|
     CodiEnterPre................................................|CodiEnterPre|
     CodiEnterPost..............................................|CodiEnterPost|
@@ -64,6 +65,9 @@ Numi (https://numi.io). It opens a pane synchronized to your main buffer which
 displays the results of evaluating each line as you type (with NeoVim or Vim
 with |+job| and |+channel|, asynchronously). It's extensible to nearly any
 language that provides a REPL (interactive interpreter)!
+
+If you're using NeoVim, by default it uses virtual text to print the output
+from the REPL, similar to other plugins used in other popular editors.
 
 See |codi-interpreters-defaults| for languages with built-in support.
 
