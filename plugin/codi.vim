@@ -81,6 +81,12 @@ if !exists('g:codi#virtual_text')
     let g:codi#virtual_text = 0
   endif
 endif
+if !exists('g:codi#virtual_text_prefix')
+  let g:codi#virtual_text_prefix = "❯ "
+endif
+
+" Highlight group for virtual text output
+highlight default link CodiVirtualText Statement
 
 command! -nargs=? -bang -bar -complete=filetype Codi call codi#run(<bang>0, <f-args>)
 command! -bar CodiUpdate call codi#update()

@@ -26,6 +26,7 @@ USAGE.............................................................|codi-usage|
     :Codi!! {filetype}...............................................|:Codi!!|
     :CodiUpdate..................................................|:CodiUpdate|
     SHELL WRAPPER.........................................|codi-usage-wrapper|
+    VIRTUAL TEXT...........................................|codi-virtual-text|
 CONFIGURATION.............................................|codi-configuration|
     g:codi#interpreters..................................|g:codi#interpreters|
     g:codi#aliases............................................|g:codi#aliases|
@@ -68,6 +69,7 @@ language that provides a REPL (interactive interpreter)!
 
 If you're using NeoVim, by default it uses virtual text to print the output
 from the REPL, similar to other plugins used in other popular editors.
+See |codi-virtual-text| for more info.
 
 See |codi-interpreters-defaults| for languages with built-in support.
 
@@ -179,7 +181,20 @@ SHELL WRAPPER                                             *codi-usage-wrapper*
                  hi NonText ctermfg=0 |\
                  Codi $syntax" "$@"
              }
-<
+>
+VIRTUAL TEXT                                               *codi-virtual_text*
+
+If you're using NeoVim, by default it uses virtual text to print the output
+from the REPL, similar to other plugins used in other popular editors.
+
+Custom Highlight Group~
+Codi uses CodiVirtualText custom highlight group to syntax highlight the
+virtual text output. By defaults is link to Statement group, but you can
+override it by using like this
+
+>
+             highlight CodiVirtualText guifg=cyan
+>
 ==============================================================================
 CONFIGURATION                                             *codi-configuration*
 
@@ -320,6 +335,12 @@ g:codi#virtual_text
              corresponding line.
 
              Default value is 1, if on nvim.
+
+                                                   *g:codi#virtual_text_prefix*
+g:codi#virtual_text_prefix
+             Symbol that is prepend to the output text.
+
+             Default value is "❯ "
 
 ==============================================================================
 AUTOCOMMANDS                                               *codi-autocommands*
