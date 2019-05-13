@@ -700,7 +700,9 @@ function! s:nvim_codi_output_to_virtual_text(bufnr, result)
   " Iterate through the result and print using virtual text
   let i = 0
   for line in a:result
-    call nvim_buf_set_virtual_text(a:bufnr, -1, i, [[g:codi#virtual_text_prefix . line, "CodiVirtualText"]], {})   
+    if len(line)
+      call nvim_buf_set_virtual_text(a:bufnr, -1, i, [[g:codi#virtual_text_prefix . line, "CodiVirtualText"]], {})   
+    endif
     let i += 1
   endfor
 endfunction
