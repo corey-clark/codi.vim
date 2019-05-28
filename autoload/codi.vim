@@ -702,6 +702,8 @@ function! s:nvim_codi_output_to_virtual_text(bufnr, result)
   for line in a:result
     if len(line)
       call nvim_buf_set_virtual_text(a:bufnr, -1, i, [[g:codi#virtual_text_prefix . line, "CodiVirtualText"]], {})   
+    else
+      call nvim_buf_clear_namespace(a:bufnr, -1, i, i+1)
     endif
     let i += 1
   endfor
