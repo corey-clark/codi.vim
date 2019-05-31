@@ -20,13 +20,13 @@ INTRODUCTION...............................................|codi-introduction|
     WARNINGS......................................|codi-introduction-warnings|
     DEPENDENCIES..............................|codi-introduction-dependencies|
     GOTCHAS........................................|codi-introduction-gotchas|
+    VIRTUAL TEXT...........................................|codi-virtual-text|
 USAGE.............................................................|codi-usage|
     :Codi {filetype}...................................................|:Codi|
     :Codi!............................................................|:Codi!|
     :Codi!! {filetype}...............................................|:Codi!!|
     :CodiUpdate..................................................|:CodiUpdate|
     SHELL WRAPPER.........................................|codi-usage-wrapper|
-    VIRTUAL TEXT...........................................|codi-virtual-text|
 CONFIGURATION.............................................|codi-configuration|
     g:codi#interpreters..................................|g:codi#interpreters|
     g:codi#aliases............................................|g:codi#aliases|
@@ -141,6 +141,19 @@ GOTCHAS                                            *codi-introduction-gotchas*
   "vi-movement-mode" in ~/.inputrc will not send input as expected, since
   <c-j> is '\n'.
 
+VIRTUAL TEXT                                               *codi-virtual_text*
+
+If you're using NeoVim, by default it uses virtual text to print the output
+from the REPL, similar to other plugins used in other popular editors.
+
+Custom Highlight Group~
+Codi uses CodiVirtualText custom highlight group to syntax highlight the
+virtual text output. By defaults is link to Statement group, but you can
+override it by using like this
+
+>
+             highlight CodiVirtualText guifg=cyan
+>
 ==============================================================================
 USAGE                                                             *codi-usage*
 
@@ -181,20 +194,7 @@ SHELL WRAPPER                                             *codi-usage-wrapper*
                  hi NonText ctermfg=0 |\
                  Codi $syntax" "$@"
              }
->
-VIRTUAL TEXT                                               *codi-virtual_text*
-
-If you're using NeoVim, by default it uses virtual text to print the output
-from the REPL, similar to other plugins used in other popular editors.
-
-Custom Highlight Group~
-Codi uses CodiVirtualText custom highlight group to syntax highlight the
-virtual text output. By defaults is link to Statement group, but you can
-override it by using like this
-
->
-             highlight CodiVirtualText guifg=cyan
->
+<
 ==============================================================================
 CONFIGURATION                                             *codi-configuration*
 
